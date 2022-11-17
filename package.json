@@ -1,0 +1,16 @@
+{
+  "name": "pointet",
+  "version": "1.0.0",
+  "description": "you ball end world",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Daniel Nep",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

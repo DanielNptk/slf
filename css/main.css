@@ -1,0 +1,45 @@
+:root {
+    --orange-color: #FF891D;
+    --back-color: #F5F0ED;
+}
+
+body {
+    cursor: url('../assets/cursor.svg'), auto;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    background-color: var(--orange-color);
+}
+
+.field {
+    width: calc(100vw - 6vh);
+    height: calc(100vh - 6vh);
+    border-radius: 30px;
+    background-color: var(--back-color);
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: 140px;
+    color: var(--orange-color);
+}
+
+.letter {
+    position: absolute;
+    display: inline-block;
+    /* border: 2px solid var(--orange-color); */
+}
+
+.font-one {
+    font-family: 'Babylonica', cursive;
+}
+
+.font-two {
+    font-family: 'Hammersmith One', sans-serif;
+}
+
+.font-three {
+    font-family: 'VT323', monospace;
+}
