@@ -1,7 +1,5 @@
 import { Letter } from "./Letter.js"
 
-// let field = document.querySelector('.field');
-
 const createLetter = () => {
     let letterObj = new Letter();
 
@@ -14,5 +12,4 @@ const createLetter = () => {
     return letterElem;
 }
 
-// field.addEventListener('click', createLetter);
 export default createLetter;

@@ -22,12 +22,19 @@ const letterHandler = (e) => {
 
 const spawnNewLetter = () => {
     return new Promise((resolve) => {
-        setTimeout(() => {
-            letterElem = createLetter();
-            letterArray.push(letterElem);
+        letterElem = createLetter();
+        letterArray.push(letterElem);
 
-            resolve(field.append(letterElem));            
-        }, 1000);
+        setTimeout(() => {
+            letterElem.animate([{opacity: 0}, {opacity: 1}], {
+                duration: 200,
+                easing: 'linear'
+            });
+    
+            resolve(field.append(letterElem));
+    
+            console.log(letterArray);
+        }, 200);
     });    
 }
 
@@ -35,16 +42,14 @@ const makeLetterFollow = () => {
     return new Promise((resolve) => {
         setTimeout(() => {
             resolve(field.addEventListener('mousemove', letterHandler));
-        }, 1500)
+        }, 800);
     }).catch(console.log(new Error('There is no letter to make it follow you!')));
 }
 
 const placeLetter = () => {
     return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(field.removeEventListener('mousemove', letterHandler));
-        }, 0)
-    })
+        resolve(field.removeEventListener('mousemove', letterHandler));
+    });
 }
 
 const letterControls = {
