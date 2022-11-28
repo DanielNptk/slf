@@ -9,15 +9,40 @@ let letterElem;
 let top;
 let left;
 
+let difX = 0;
+let difY = 0;
+
+let posX = 0;
+let posY = 0;
+
+let req;
+
 const letterHandler = (e) => {
     try {
         top = e.clientY - fieldCoords.top - field.clientTop - letterElem.clientHeight / 2;
         left = e.clientX - fieldCoords.left - field.clientLeft - letterElem.clientWidth / 2;
-        letterElem.style.top = top + 'px';
-        letterElem.style.left = left + 'px';
     } catch(err) {
         console.log(new Error('Letter element does not exist!'));
     }
+}
+
+function followSmooth() {
+    if(top && left) {
+        difX = top - posX;
+        difY = left - posY;
+
+        posX += (difX / 15);
+        posY += (difY / 15);
+
+        letterElem.style.top = posX + 'px';
+        letterElem.style.left = posY + 'px';
+    }
+
+    req = requestAnimationFrame(followSmooth);
+}
+
+function stopFollowSmooth() {
+    cancelAnimationFrame(req);
 }
 
 const spawnNewLetter = () => {
@@ -30,24 +55,27 @@ const spawnNewLetter = () => {
                 duration: 200,
                 easing: 'linear'
             });
-    
+
             resolve(field.append(letterElem));
-    
-            console.log(letterArray);
-        }, 200);
+        }, 100);
     });    
 }
 
 const makeLetterFollow = () => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(field.addEventListener('mousemove', letterHandler));
+
+            followSmooth();
         }, 800);
-    }).catch(console.log(new Error('There is no letter to make it follow you!')));
+    })
+    // .catch(console.log(new Error('There is no letter to make it follow you!')));
 }
 
 const placeLetter = () => {
     return new Promise((resolve) => {
+        stopFollowSmooth();
+
         resolve(field.removeEventListener('mousemove', letterHandler));
     });
 }
